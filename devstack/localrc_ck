@@ -1,0 +1,30 @@
+[[local|localrc]]
+# Refresh sources
+RECLONE=no
+
+# Keep a log of everything
+LOGFILE=$DEST/logs/stack.sh.log
+
+# Passwords
+RABBIT_PASSWORD=password
+DATABASE_PASSWORD=password
+ADMIN_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+
+# Cinder
+VOLUME_BACKING_FILE_SIZE=102500M
+CINDER_SECURE_DELETE=False
+
+# Neutron
+disable_service n-net
+enable_service q-svc,q-agt,q-dhcp,q-l3,q-meta,q-lbaas,neutron
+
+disable_service tempest
+
+# Ceilometer
+enable_plugin ceilometer https://git.openstack.org/openstack/ceilometer
+
+CLOUDKITTYDASHBOARD_REPO="https://review.openstack.org/openstack/cloudkitty-dashboard"
+CLOUDKITTYDASHBOARD_BRANCH="refs/changes/67/305067/6"
+enable_plugin cloudkitty https://github.com/stackforge/cloudkitty master
